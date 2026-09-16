@@ -26,8 +26,8 @@ body{
 
 .nav-links{
     display: flex;
-    gap: 20px;
     list-style: none;
+    gap: 10px;
 }
 
 .nav-links a{
