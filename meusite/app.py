@@ -36,7 +36,6 @@ def cadastro():
             return redirect(url_for("login"))
     return render_template("cadastro.html")
 
-@app.route("/", methods=["GET", "POST"])
 @app.route("/login", methods=["GET", "POST"])
 
 def login():
@@ -62,11 +61,11 @@ def login_obrigatorio(f):
         return f(*args, **kwargs)
     return wrapper
 
+@app.route("/")
 @app.route("/index")
-@login_obrigatorio
 
 def index():
-    return render_template("index.html", email=session["email"])
+    return render_template("index.html", email=session.get("email"))
 
 @app.route("/logout")
 

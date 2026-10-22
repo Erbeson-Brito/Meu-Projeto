@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>meusite.com</title>
 </head>
     <body>
@@ -15,7 +15,13 @@
                 <li><a href="#">Serviços</a></li>
                 <li><a href="#">Contatos</a></li>
             </ul>
-            <a href="login.html" class="botao-sair">Sair</a>
+            <div>
+                {% if email %}
+                    <a href="{{ url_for('logout') }}" class="btn-LoginLogout">Sair</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn-LoginLogout">Entrar</a>
+                {% endif %}
+            </div>
         </header>
         <main>
             <section class="inicio">

@@ -36,7 +36,7 @@ body{
     font-size: 16px;
 }
 
-.botao-sair{
+.btn-LoginLogout{
     background-color: #2563eb;
     border: none;
     padding: 10px 22px;
