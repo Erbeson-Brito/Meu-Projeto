@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <title>meusite/login</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>LOGIN</h1>
+            {% with mensagens = get_flashed_messages() %}
+                {% for m in mensagens %}<p>{{ m }}</p>{% endfor %}
+            {% endwith %}
+            <form action="{{ url_for('login') }}" method="POST">
+                <div class="input-box">
+                    <label for="usuario">E-mail
+                        <input type="email" name="email" placeholder="Digite seu email" required>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="senha" >Senha
+                        <input type="password" name="senha" placeholder="Digite sua senha" required>
+                    </label>
+                </div>
+                <div class="lembrar-esquecer">
+                    <label for="checkbox">
+                        <input type="checkbox" name="lembrar-senha"> Lembrar senha
+                    </label>
+                    <a href="#">Esqueci a senha</a>
+                </div>
+                <button type="submit" class="entrar">Entrar</button>
+                <div class="registro">
+                    <p>Não tem conta?<a href="{{ url_for('cadastro') }}">Criar conta</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+
+</html>

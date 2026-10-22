@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
+    <title>meusite/cadastro</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>CADASTRO</h1>
+            {% with mensagens = get_flashed_messages() %}
+                {% for m in mensagens %}<p>{{ m }}</p>{% endfor %}
+            {% endwith %}
+            <form action="{{ url_for('cadastro') }}" method="POST">
+                <div class="input-box">
+                    <label for="nome">Nome completo
+                        <input type="text" name="nome" placeholder="Digite seu nome" required>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="email">E-mail
+                        <input type="email" name="email" placeholder="Digite seu email" required>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="senha">Senha
+                        <input type="password" name="senha" placeholder="Crie uma senha" minlength="6" required>
+                    </label>
+                </div>
+                <div class="input-box">
+                    <label for="confirmar-senha">Confirmar senha
+                        <input type="password" name="confirmar-senha" placeholder="Repita a senha" minlength="6" required>
+                    </label>
+                </div>
+                <div class="termos">
+                    <label for="checkbox">
+                        <input type="checkbox" name="termos" required> Aceito os <a href="#">termos de uso</a>
+                    </label>
+                </div>
+                <button type="submit" class="criarConta">Criar conta</button>
+                <div class="registro">
+                    <p>Já tem conta?<a href="{{ url_for('login') }}"> Entrar</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
+
+</html>
