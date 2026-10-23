@@ -20,24 +20,34 @@ def criar_tabela():
                 senha_hash TEXT NOT NULL
             )
         """)
+def login_obrigatorio(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        if "usuario_id" not in  session:
+            return redirect(url_for("login"))
+        return f(*args, **kwargs)
+    return wrapper
 
 @app.route("/cadastro", methods=["GET", "POST"])
-
 def cadastro():
     if request.method == "POST":
         email = request.form["email"].strip().lower()
         senha = request.form["senha"]
         try:
             with get_db() as conn:
-                conn.execute("INSERT INTO usuarios (email, senha_hash) VALUES (?, ?)",
-                       (email, generate_password_hash(senha)),)
+                cursor = conn.execute(
+                    "INSERT INTO usuarios (email, senha_hash) VALUES (?, ?)", (email, generate_password_hash(senha)),
+                )
+                novo_id = cursor.lastrowid
         except sqlite3.IntegrityError:
             flash("Esse email já está cadastrado.")
-            return redirect(url_for("login"))
+            return redirect(url_for("cadastro"))
+        session["usuario_id"] = novo_id
+        session["email"] = email
+        return redirect(url_for("index"))
     return render_template("cadastro.html")
 
 @app.route("/login", methods=["GET", "POST"])
-
 def login():
     if request.method == "POST":
         email = request.form["email"].strip().lower()
@@ -53,14 +63,6 @@ def login():
         return redirect(url_for("login"))
     return render_template("login.html")
 
-def login_obrigatorio(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        if "usuario_id" not in  session:
-            return redirect(url_for("login"))
-        return f(*args, **kwargs)
-    return wrapper
-
 @app.route("/")
 @app.route("/index")
 
@@ -73,6 +75,7 @@ def logout():
     session.clear()
     return redirect(url_for("login"))
 
+criar_tabela()
+
 if __name__ == "__main__":
-    criar_tabela()
     app.run(debug=True)
