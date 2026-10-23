@@ -10,9 +10,11 @@
     <main>
         <div class="container">
             <h1>LOGIN</h1>
-            {% with mensagens = get_flashed_messages() %}
-                {% for m in mensagens %}<p>{{ m }}</p>{% endfor %}
-            {% endwith %}
+            <div class="alertaMSG">
+                {% with mensagens = get_flashed_messages() %}
+                    {% for m in mensagens %}<p>{{ m }}</p>{% endfor %}
+                {% endwith %}
+            </div>
             <form action="{{ url_for('login') }}" method="POST">
                 <div class="input-box">
                     <label for="usuario">E-mail
@@ -32,7 +34,7 @@
                 </div>
                 <button type="submit" class="entrar">Entrar</button>
                 <div class="registro">
-                    <p>Não tem conta?<a href="{{ url_for('cadastro') }}">Criar conta</a></p>
+                    <p>Não tem conta? <a href="{{ url_for('cadastro') }}">Criar conta</a></p>
                 </div>
             </form>
         </div>

@@ -27,6 +27,12 @@ body{
     text-align: center;
 }
 
+.alertaMSG{
+    margin-top: 10px;
+    text-align: center;
+    color: red;
+}
+
 .input-box{
     width: 100%;
     height: 50px;
