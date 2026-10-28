@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = "Erbeson-Brito-de-Souza"
 
 def get_db():
-    conn = sqlite3.connect("usuarios.db")
+    conn = sqlite3.connect("usuarios_db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -33,6 +33,11 @@ def cadastro():
     if request.method == "POST":
         email = request.form["email"].strip().lower()
         senha = request.form["senha"]
+        confirmar = request.form["confirmar-senha"]
+
+        if senha != confirmar:
+            flash("As senhas não são iguais.")
+            return request.form(url_for("cadastro"))
         try:
             with get_db() as conn:
                 cursor = conn.execute(
