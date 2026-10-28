@@ -37,7 +37,7 @@ def cadastro():
 
         if senha != confirmar:
             flash("As senhas não são iguais.")
-            return request.form(url_for("cadastro"))
+            return redirect.form(url_for("cadastro"))
         try:
             with get_db() as conn:
                 cursor = conn.execute(
@@ -70,7 +70,6 @@ def login():
 
 @app.route("/")
 @app.route("/index")
-
 def index():
     return render_template("index.html", email=session.get("email"))
 
