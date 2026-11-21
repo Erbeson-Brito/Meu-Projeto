@@ -4,7 +4,7 @@ import sqlite3
 from functools import wraps
 import os
 
-DB_PATH = "/tmp/usuarios.db" if os.environ.get("VERCEl") else "usuarios.db"
+DB_PATH = "/tmp/usuarios.db" if os.environ.get("VERCEL") else "usuarios.db"
 
 app = Flask(__name__)
 app.secret_key = "Erbeson-Brito-de-Souza"
