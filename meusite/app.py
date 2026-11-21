@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "Erbeson-Brito-de-Souza"
 
 def get_db():
-    conn = sqlite3.connect("DB_PATH")
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
